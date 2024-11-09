@@ -51,23 +51,28 @@ def exercise_2():
 
 def exercise_3():
     df = pd.read_csv("datasets/diabetes.csv")
-    (train_set, test_set) = train_test_split(df.values, train_size=0.7, random_state=299387)
+    accuracy_first = []
+    accuracy_second = []
+    for i in range(10):
+        (train_set, test_set) = train_test_split(df.values, train_size=0.7, random_state=299387)
 
-    mlp = MLPClassifier(hidden_layer_sizes=(6,3), max_iter=500, activation='relu')
+        mlp = MLPClassifier(hidden_layer_sizes=(6,3), max_iter=500, activation='relu')
 
-    mlp.fit(train_set[:, 0:8], train_set[:, 8])
+        mlp.fit(train_set[:, 0:8], train_set[:, 8])
 
-    predictions = mlp.predict(test_set[:, 0:8])
-    print(accuracy_score(predictions, test_set[:, 8])*100)
-    print(confusion_matrix(predictions, test_set[:, 8]))
+        predictions = mlp.predict(test_set[:, 0:8])
+        accuracy_first.append(accuracy_score(predictions, test_set[:, 8])*100)
+        #print(confusion_matrix(predictions, test_set[:, 8]))
 
-    mlp = MLPClassifier(hidden_layer_sizes=(5,2), max_iter=2000, activation='tanh')
+        mlp = MLPClassifier(hidden_layer_sizes=(6,4,2), max_iter=1000, activation='identity')
 
-    mlp.fit(train_set[:, 0:8], train_set[:, 8])
+        mlp.fit(train_set[:, 0:8], train_set[:, 8])
 
-    predictions = mlp.predict(test_set[:, 0:8])
-    print(accuracy_score(predictions, test_set[:, 8]) * 100)
-    print(confusion_matrix(predictions, test_set[:, 8]))
+        predictions = mlp.predict(test_set[:, 0:8])
+        accuracy_second.append(accuracy_score(predictions, test_set[:, 8]) * 100)
+        #print(confusion_matrix(predictions, test_set[:, 8]))
+    print(np.mean(accuracy_first))
+    print(np.mean(accuracy_second))
     # negative positive is worse than positive negative
 
 
