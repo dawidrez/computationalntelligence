@@ -5,3 +5,7 @@ Each folder named labx contains code from laboratory class number x. These class
 -Classification
 
 -Neural networks
+
+-CNN networks
+
+-genetic algorithms
