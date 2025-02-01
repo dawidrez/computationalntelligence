@@ -9,3 +9,7 @@ Each folder named labx contains code from laboratory class number x. These class
 -CNN networks
 
 -genetic algorithms
+
+-pso
+
+-opencv
